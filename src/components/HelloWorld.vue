@@ -1,16 +1,21 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <router-link to="/">Home</router-link> |
+    <router-link to="/">Home</router-link>
+    |
     <router-link to="/gallery">Gallery</router-link>
-    <ul id="my-list">
-      <li v-for="post in posts" :key="post">
-      </li>
-    </ul>
+    <div>
+      <button v-on:click="increment">+</button>
+      <button v-on:click="decrement">-</button>
+      <button v-on:click="getValue">Get value</button>
+      <hr>
+      <span>{{ counter }}</span><br>
+    </div>
     <ul class="list-group">
       <li v-for="comment in comments" class="list-group-item">
         <span class="circle">{{ comment.id }}</span>
-        {{ comment.title }}<hr>
+        {{ comment.title }}
+        <hr>
         >> {{ comment.body }}
       </li>
     </ul>
@@ -22,10 +27,21 @@
     name: 'HelloWorld',
     data() {
       return {
-        posts: [1, 2, 3, 4],
+        counter: 0,
         msg: 'Top notch js service',
         comments: [],
       }
+    },
+    methods: {
+      increment: function() {
+        this.counter++
+      },
+      decrement: function () {
+        this.counter--
+      },
+      getValue: function () {
+        alert(this.counter)
+      },
     },
     created() {
       let url = 'https://jsonplaceholder.typicode.com/posts'

@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <div id="app" v-on:mousemove="updateCoordinates">
+    <span>Coordinates are: {{ x }} / {{ y }}</span><br>
     <img src="https://javascriptforwp.com/wp-content/uploads/2016/03/badge-js-for-wp-conf.png">
     <router-view/>
   </div>
@@ -7,7 +8,20 @@
 
 <script>
   export default {
-    name: 'App'
+    name: 'App',
+    data() {
+      return {
+        x: 0,
+        y: 0,
+        link: 'http://tvoi-dom.in.ua'
+      }
+    },
+    methods: {
+      updateCoordinates: function (event) {
+        this.x = event.clientX
+        this.y = event.clientY
+      }
+    }
   }
 </script>
 
