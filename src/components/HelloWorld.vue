@@ -8,9 +8,45 @@
       <button v-on:click="increment">+</button>
       <button v-on:click="decrement">-</button>
       <button v-on:click="getValue">Get value</button>
-      <hr>
+      <br>
       <span>{{ counter }}</span><br>
+      <hr>
     </div>
+
+    <select v-model="selected">
+      <option value="">Value source type</option>
+      <option>Feature</option>
+      <option>Generic</option>
+      <option>Feature LOV</option>
+      <option>Feature Range</option>
+    </select>
+    <br><br>
+
+    <div v-if="selected === 'Feature'" class="bordered">
+      {{ selected }} selected
+      <br>
+      <label>Provider Feature Id</label><br>
+      <input v-model="providerFeatureId" class="mbot1">
+      <br>
+      <label>Active</label>
+      <input type="checkbox" id="checkbox" v-model="checked">
+
+    </div>
+    <div v-if="selected === 'Generic'" class="bordered">
+      {{ selected }} selected
+    </div>
+    <div v-if="selected === 'Feature LOV'" class="bordered">
+      {{ selected }} selected
+    </div>
+    <div v-if="selected === 'Feature Range'" class="bordered">
+      {{ selected }} selected
+    </div>
+
+    <div class="result bordered" v-show="selected">
+      <p>Provider Feature Id: {{ providerFeatureId }}</p>
+      <label for="checkbox">Active: {{ checked }}</label>
+    </div>
+
     <ul class="list-group">
       <li v-for="comment in comments" class="list-group-item">
         <span class="circle">{{ comment.id }}</span>
@@ -30,6 +66,9 @@
         counter: 0,
         msg: 'Top notch js service',
         comments: [],
+        selected: '',
+        providerFeatureId: '',
+        checked: false,
       }
     },
     methods: {
@@ -72,6 +111,10 @@
     color: #42b983;
   }
 
+  .mbot1 {
+    margin-bottom: 1em;
+  }
+
   .circle {
     background: #495057;
     border-radius: 0.8em;
@@ -84,5 +127,12 @@
     margin-right: 5px;
     text-align: center;
     width: 1.6em;
+  }
+
+  .bordered {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 1em;
+    padding: 1em;
   }
 </style>
